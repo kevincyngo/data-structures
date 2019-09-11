@@ -96,22 +96,18 @@ public class DynamicArray<T> implements Iterable<T> {
     }
 
     // Iterator is still fast but not as fast as iterative for loop
-    @Override
     public java.util.Iterator<T> iterator() {
         return new java.util.Iterator<T>() {
             int index = 0;
 
-            @Override
             public boolean hasNext() {
                 return index < len;
             }
 
-            @Override
             public T next() {
                 return arr[index++];
             }
 
-            @Override
             public void remove() {
                 throw new UnsupportedOperationException();
             }
