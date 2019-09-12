@@ -32,32 +32,61 @@ public class DoublyLinkedList<T> implements Iterable<T> {
 
     // Add a node to the tail of the linked list, O(1)
     public void addLast(T elem) {
-
+        if (isEmpty()) {
+            head = tail = new Node<T>(elem, null, null);
+        } else {
+            tail.next = new Node<T>(elem, tail, null);
+            tail = tail.next;
+        }
+        size++;
     }
 
     // Add an element to the beginning of this linked list, O(1)
     public void addFirst(T elem) {
-
+        if (isEmpty()) {
+            head = tail = new Node<T>(elem, null, null);
+        } else {
+            head.prev = new Node<T>(elem, null, head);
+            head = head.prev;
+        }
+        size++;
     }
 
     // Check the value of the first node if it exists, O(1)
     public T peekFirst() {
-
+        if (isEmpty()) throw new RuntimeException("Empty list");
+        return head.data;
     }
 
     // Check the value of the last node if it exists, O(1)
     public T peekLast() {
-
+        if (isEmpty()) throw new RuntimeException("Empty list");
+        return tail.data;
     }
 
     // Remove the first value at the head of the linked list, O(1)
+    // Return the data in the removed node
     public T removeFirst() {
+        if (isEmpty()) throw new RuntimeException("Empty list");
+        T data = head.data;
+        head = head.next;
+        size--;
 
+        if (isEmpty()) tail = null;
+        else head.prev = null;
+        return data;
     }
 
     // Remove the last value at the tail of the linked list, O(1)
     public T removeLast() {
+        if (isEmpty()) throw new RuntimeException("Empty list");
+        T data = tail.data;
+        tail = tail.prev;
+        size--;
 
+        if (isEmpty()) head = null;
+        else tail.next = null;
+        return data;
     }
 
     // Remove an arbitrary node from the linked list, O(1)
